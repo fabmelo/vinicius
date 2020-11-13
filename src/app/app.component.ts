@@ -16,9 +16,9 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
     await this.getDataClient();
-    await this.postDatagetSignIn();
+    await this.postDataSignIn();
     await this.postDataAuth();
-    await this.getDataFeed();
+    //await this.getDataFeed();
   }
 
   getDataClient(){
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-  postDatagetSignIn(){
+  postDataSignIn(){
     this.feedService.postSignIn().subscribe(
       (res: boolean) => {
         console.log("SignIn => ", res);

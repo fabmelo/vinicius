@@ -14,15 +14,10 @@ const PASSWORD = "102030";
 )
 export class FeedService {
 
-  headers = new HttpHeaders({'Content-Type':'application/json; charset=utf-8'});
-
   constructor(
     private httpClient: HttpClient,
     private utilService: UtilService
-  ) {
-    this.headers.append('login', LOGIN);
-    this.headers.append('password', PASSWORD);
-  }
+  ) {}
 
   postSignIn(): Observable<boolean>{
     return this.httpClient
