@@ -17,8 +17,8 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
     await this.getDataClient();
-    // await this.getDataFeed(); // Está retornando 405 - Method Not Allowed
-    // await this.getDataAuth(); // Está retornando 404 - Not Found
+    await this.getDatagetSignIn(); // Está retornando 405 - Method Not Allowed
+    await this.getDataAuth(); // Está retornando 404 - Not Found
   }
 
   getDataClient(){
@@ -27,18 +27,18 @@ export class AppComponent implements OnInit {
         this.dataClient = res;
       },
       (error: any) => {
-        console.error(error.statusText);
+        console.error("ERRO: ", error.statusText);
       }
     );
   }
 
-  getDataFeed(){
-    this.feedService.getFeed().subscribe(
+  getDatagetSignIn(){
+    this.feedService.getSignIn().subscribe(
       (res: boolean) => {
         console.log("SignIn => ", res);
       },
       (error: any) => {
-        console.error(error.statusText);
+        console.error("ERRO: ", error.statusText);
       }
     );
   }
@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
         console.log("Auth => ", res);
       },
       (error: any) => {
-        console.error(error.statusText);
+        console.error("ERRO: ", error.statusText);
       }
     );
   }
