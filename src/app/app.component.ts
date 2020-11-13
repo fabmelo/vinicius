@@ -12,13 +12,13 @@ export class AppComponent implements OnInit {
 
   constructor(
     private feedService: FeedService
-  ) {
-  }
+  ) {}
 
   async ngOnInit() {
     await this.getDataClient();
-    await this.getDatagetSignIn(); // Está retornando 405 - Method Not Allowed
-    await this.getDataAuth(); // Está retornando 404 - Not Found
+    await this.postDatagetSignIn();
+    await this.postDataAuth();
+    await this.getDataFeed();
   }
 
   getDataClient(){
@@ -32,8 +32,8 @@ export class AppComponent implements OnInit {
     );
   }
 
-  getDatagetSignIn(){
-    this.feedService.getSignIn().subscribe(
+  postDatagetSignIn(){
+    this.feedService.postSignIn().subscribe(
       (res: boolean) => {
         console.log("SignIn => ", res);
       },
@@ -43,10 +43,21 @@ export class AppComponent implements OnInit {
     );
   }
 
-  getDataAuth(){
-    this.feedService.getAuth().subscribe(
+  postDataAuth(){
+    this.feedService.postAuth().subscribe(
       (res: any) => {
         console.log("Auth => ", res);
+      },
+      (error: any) => {
+        console.error("ERRO: ", error.statusText);
+      }
+    );
+  }
+
+  getDataFeed(){
+    this.feedService.getFeed().subscribe(
+      (res: any) => {
+        console.log("Feed => ", res);
       },
       (error: any) => {
         console.error("ERRO: ", error.statusText);

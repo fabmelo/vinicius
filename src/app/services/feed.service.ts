@@ -24,22 +24,28 @@ export class FeedService {
     this.headers.append('password', PASSWORD);
   }
 
+  postSignIn(): Observable<boolean>{
+    return this.httpClient
+      .post<boolean>(`${URLFeed}/SignIn?login=${LOGIN}&password=${PASSWORD}`, null)
+      .pipe(retry(1), catchError(error => this.utilService.handleError(error)));
+  }
+
+  postAuth(): Observable<any>{
+    return this.httpClient
+      .post<any>(`${URLFeed}/token/authentication?login=${LOGIN}&password=${PASSWORD}`, null)
+      .pipe(retry(1), catchError(error => this.utilService.handleError(error)));
+  }
+
+  getFeed(): Observable<any>{
+    return this.httpClient
+      .get<any>(`${URLFeed}/services/quotes/quote/petr4`)
+      .pipe(retry(1), catchError(error => this.utilService.handleError(error)));
+  }
+
   getClient():  Observable<Array<any>>{
     return this.httpClient
         .get<Array<any>>(`${URL}/client`)
         .pipe(retry(1), catchError(error => this.utilService.handleError(error)));
-  }
-
-  getSignIn(): Observable<boolean>{
-    return this.httpClient
-      .get<boolean>(`${URLFeed}/SignIn`)
-      .pipe(retry(1), catchError(error => this.utilService.handleError(error)));
-  }
-
-  getAuth(): Observable<any>{
-    return this.httpClient
-      .get<any>(`${URLFeed}/token/authentication?login=${LOGIN}&password=${PASSWORD}`)
-      .pipe(retry(1), catchError(error => this.utilService.handleError(error)));
   }
 
 }
